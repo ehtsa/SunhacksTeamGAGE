@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Wellness and Inspiration App - Data Visualization</title>
+    <link rel="stylesheet" href="/style.css">
+    <!-- Include Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Data Visualization</h1>
+        <div id="chartContainer" class="chart-container">
+            <!-- Canvas element where Chart.js will render the chart -->
+            <canvas id="moodChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Function to fetch mood data from the backend
+        function fetchMoodData() {
+            // This URL would need to be updated to point to your backend endpoint
+            return fetch('/api/mood-data')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .catch(error => console.error('There has been a problem with your fetch operation:', error));
+        }
+
+        // Function to render the mood chart using Chart.js
+        function renderMoodChart(moodData) {
+            const ctx = document.getElementById('moodChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: moodData.labels, // Your labels array (e.g., dates)
+                    datasets: [{
+                        label: 'Mood Score',
+                        data: moodData.dataPoints, // Your data points array (e.g., mood scores)
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Call fetchMoodData() and then render the chart with the data
+        fetchMoodData().then(moodData => {
+            if (moodData) {
+                renderMoodChart(moodData);
+            }
+        });
+    </script>
+</body>
+</html>

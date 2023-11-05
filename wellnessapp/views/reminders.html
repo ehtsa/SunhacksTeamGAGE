@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Wellness and Inspiration App - Reminders</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Medication and Hydration Reminders</h1>
+        <form id="remindersForm">
+            <h2>Medication Reminders</h2>
+            <label for="medName">Medication Name</label>
+            <input type="text" id="medName" name="medName" required>
+            
+            <label for="medTime">Reminder Time</label>
+            <input type="time" id="medTime" name="medTime" required>
+            
+            <h2>Hydration Reminders</h2>
+            <label for="hydrationInterval">Reminder Interval (in hours)</label>
+            <input type="number" id="hydrationInterval" name="hydrationInterval" required>
+            
+            <button type="submit">Save Reminders</button>
+        </form>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>
